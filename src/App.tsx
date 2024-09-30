@@ -1,79 +1,57 @@
 import { Button } from "./components/ui/button";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-  CardFooter,
-} from "./components/ui/card";
-import { Checkbox } from "./components/ui/checkbox";
-import { Input } from "./components/ui/input";
-import { Label } from "./components/ui/label";
-import { Switch } from "./components/ui/switch";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogFooter,
-  DialogDescription,
-  DialogTitle,
-} from "./components/ui/dialog";
-import React from "react";
+import { FaSearch, FaCog, FaUsers } from "react-icons/fa";
+import { Separator } from "./components/ui/separator";
 
 export default function App() {
-  const [open, setOpen] = React.useState(false);
-
   return (
-    <main className="w-screen h-screen flex justify-center items-center flex-col">
-      <Card className="w-[30rem]">
-        <CardHeader>
-          <CardTitle>로그인</CardTitle>
-        </CardHeader>
-        <CardContent className="flex flex-col gap-y-2 pb-4">
-          <Input placeholder="아이디" variant="myInput" />
-          <Input placeholder="비밀번호" type="password" variant="myInput" />
-        </CardContent>
-        <CardFooter className="block">
-          <div className="w-full flex justify-between mb-2">
-            <div className="flex items-center space-x-2">
-              <Checkbox id="keep" />
-              <Label htmlFor="keep">로그인 유지</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Label htmlFor="id-security">IP 보안</Label>
-              <Switch id="ip-security" />
-            </div>
-          </div>
-          <Button className="w-full">로그인</Button>
-        </CardFooter>
-      </Card>
+    <main className="flex flex-col w-screen h-screen">
+      {/* 상단 네비게이션 바 */}
+      <header className="h-[64px] w-screen flex flex-row items-center justify-end gap-4 pr-4">
+        <Button variant="ghost">
+          <FaSearch size={20} color="gray" />
+        </Button>
+        <Button variant="ghost">
+          <FaCog size={20} color="gray" />
+        </Button>
+        <Button variant="ghost">
+          <FaUsers size={20} color="gray" />
+        </Button>
+      </header>
 
-      <Button variant="link" onClick={() => setOpen(true)}>
-        비밀번호를 잊어버리셨나요?
-      </Button>
+      <Separator className="border-gray-400 border-t" />
 
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>비밀번호 재설정</DialogTitle>
-            <DialogDescription>
-              회원가입시 기입한 이메일로 비밀번호 재설정 링크를 보내 드립니다.
-            </DialogDescription>
-          </DialogHeader>
-          <div className="flex flex-col space-y-2">
-            <Input variant="myInput" placeholder="아이디를 입력하세요." />
-            <Input
-              variant="myInput"
-              placeholder="가입시 사용한 이메일 주소를 입력하세요."
+      {/* 메인 콘텐츠 영역 */}
+      <section className="flex flex-row h-full w-screen">
+        {/* 사이드바 */}
+        <aside className="w-[220px] h-full">Sidebar</aside>
+
+        <Separator
+          orientation="vertical"
+          className="border-gray-400 border-r"
+        />
+
+        {/* 메인 콘텐츠 */}
+        <div className="flex-grow h-full">
+          {/* 콘텐츠 상단 */}
+          <div className="h-[76px]">Header</div>
+
+          <Separator className="border-gray-400 border-b" />
+
+          {/* 콘텐츠 바디 */}
+          <div className="flex-grow flex flex-row h-[calc(100%-76px)]">
+            {/* 왼쪽 섹션 */}
+            <div className="w-[300px]">Left</div>
+
+            <Separator
+              orientation="vertical"
+              className="border-gray-400 border-r"
             />
+
+            {/* 메인 섹션 */}
+            <div className="flex-grow">Main</div>
           </div>
-          <DialogFooter>
-            <Button className="w-full" onClick={() => setOpen(false)}>
-              비밀번호 재설정
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+        </div>
+      </section>
     </main>
   );
 }
