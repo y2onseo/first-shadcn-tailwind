@@ -1,13 +1,11 @@
 import { Button } from "./components/ui/button";
 import { FaSearch, FaCog, FaUsers } from "react-icons/fa";
 import { Separator } from "./components/ui/separator";
-import React from "react";
-import { Input } from "./components/ui/input";
+
+import MainContents from "./mainContents";
+import AgentRun from "./agentRun";
 
 export default function App() {
-  const [activeTab, setActiveTab] = React.useState(0);
-  const commonTdClass = "text-gray-500 font-bold text-xs pl-[20px] w-[120px]";
-
   return (
     <main className="flex flex-col w-screen h-screen">
       {/* 상단 네비게이션 바 */}
@@ -107,133 +105,10 @@ export default function App() {
                     저장
                   </Button>
                 </div>
-                <div className="p-2 bg-white shadow-md flex flex-row justify-between items-center">
-                  <h1 className="text-sm">
-                    에이전트를 제어할 수 없습니다. 에이전트 컨트롤러의 상태를
-                    확인하여 주십시오.
-                  </h1>
-                  <div className="flex flex-row ">
-                    <Button variant="ghost" size="sm">
-                      시작
-                    </Button>
-                    <Separator
-                      orientation="vertical"
-                      className="border-gray-400 border-r-1 h-19"
-                    />
-                    <Button variant="ghost" size="sm">
-                      중지
-                    </Button>
-                  </div>
-                </div>
+                <AgentRun />
 
                 {/* 서버 정보 컨텐츠 */}
-                <div className="shadow-md">
-                  {/* 탭 버튼 */}
-                  <div className="flex flex-row gap-2">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className={`flex items-start px-4 py-2 rounded-none rounded-tl-md rounded-tr-md ${
-                        activeTab === 0
-                          ? "bg-white text-blue-500"
-                          : "bg-white text-gray-500"
-                      }`}
-                      onClick={() => setActiveTab(0)}
-                    >
-                      <div className="text-red-600 font-bold h-5 w-2">*</div>
-                      기본 설정
-                    </Button>
-
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className={`px-4 py-2 rounded-none rounded-tl-md rounded-tr-md ${
-                        activeTab === 1
-                          ? "bg-white text-blue-500"
-                          : "bg-white text-gray-500"
-                      }`}
-                      onClick={() => setActiveTab(1)}
-                    >
-                      고급 설정
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className={`px-4 py-2  rounded-none rounded-tl-md rounded-tr-md ${
-                        activeTab === 2
-                          ? "bg-white text-blue-500"
-                          : "bg-white text-gray-500"
-                      }`}
-                      onClick={() => setActiveTab(2)}
-                    >
-                      툴체인 설정
-                    </Button>
-                  </div>
-                  <div className="bg-white">
-                    {activeTab === 0 && (
-                      <div className="py-4">
-                        <table className="table-auto w-full">
-                          <tbody>
-                            <tr className="h-[40px]">
-                              <td className={commonTdClass}>에이전트 종류</td>
-                              <td className="pl-[20px] flex items-center pt-[5px] pb-[5px]">
-                                <Input
-                                  variant="myInput"
-                                  placeholder="에이전트 종류"
-                                  className="w-[190px] h-[28px] rounded-none"
-                                />
-                                <h1 className="text-gray-400 text-xs pl-[10px]">
-                                  ⓘ에이전트 유형은 콤보박스에 텍스트를 입력 후에
-                                  [Enter]를 입력하면 새로운 유형이 추가됩니다.
-                                </h1>
-                              </td>
-                            </tr>
-                            <tr className="h-[40px]">
-                              <td className={commonTdClass}>이름</td>
-                              <td className="pl-[20px] pt-[5px] pb-[5px]">
-                                <Input
-                                  variant="myInput"
-                                  placeholder="이름"
-                                  className="w-[680px] h-[28px] rounded-none"
-                                />
-                              </td>
-                            </tr>
-                            <tr className="h-[40px]">
-                              <td className={commonTdClass}>서버 ID</td>
-                              <td className="pl-[20px] flex items-center pt-[5px] pb-[5px]">
-                                {Array(6)
-                                  .fill(0)
-                                  .map((_, index) => (
-                                    <React.Fragment key={index}>
-                                      <Input
-                                        className="w-[40px] h-[28px] rounded-none"
-                                        variant="myInput"
-                                      />
-                                      {index < 5 && (
-                                        <span className="mx-1">-</span>
-                                      )}
-                                    </React.Fragment>
-                                  ))}
-                              </td>
-                            </tr>
-                            <tr className="h-[40px]">
-                              <td className={commonTdClass}>모니터링 경로</td>
-                              <td className="pl-[20px] pt-[5px] pb-[5px]">
-                                <Input
-                                  variant="myInput"
-                                  placeholder="모니터링 경로"
-                                  className="w-[680px] h-[28px] rounded-none"
-                                />
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    )}
-                    {activeTab === 1 && <div>탭 2의 콘텐츠</div>}
-                    {activeTab === 2 && <div>탭 3의 콘텐츠</div>}
-                  </div>
-                </div>
+                <MainContents />
               </div>
             </div>
           </div>
